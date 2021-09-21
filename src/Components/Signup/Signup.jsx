@@ -45,16 +45,13 @@ const Signup = (props) => {
             return;
         }
         try {
-            console.log("I was here");
             let response = await signUp(email, password);
             console.log(response);
             let uid = response.user.uid;
             //you are signed up
-            console.log("I was here");
             //storing profile image inside firestore
             const uploadPhotoObject = firebaseStorage.ref(`/profile/${uid}/image.jpg`).put(profileImage);
             //console.log(uploadPhotoObject);
-            console.log("I was here");
             //special event on uploadPhotoObj to track the progress of the upload and to perform operations accordingly
             uploadPhotoObject.on("state_changed", fun1, fun2, fun3);
             //to track progress of the upload
@@ -68,7 +65,6 @@ const Signup = (props) => {
             function fun2(error) {
                 console.log(error);
             }
-
             //it indicates success of the upload
             async function fun3() {
                 let profileImageUrl = await uploadPhotoObject.snapshot.ref.getDownloadURL();
